@@ -1,0 +1,138 @@
+<div class="d-flex" id="sidebarUsuario">
+    <div id="sidebar-container" class="bg-primary">
+        <div class="logo">
+            <h4 class=" text-light text-center ">USUARIO</h4>
+        </div>
+        <div class="menu">
+            <a href="/panelUsu" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Cursos</a>
+            <a href="/misDatosFisicos" class="d-block  text-light p-3"><i
+                    class="icon ion-md-clipboard mr-2 lead"></i>Datos
+                Físicos</a>
+            <a href="/misCursos" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Mis
+                Cursos</a>
+            <a href="/miPerfil" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
+            <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-cash mr-2 lead"></i>Pagos</a>
+        </div>
+    </div>
+    <div class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <form class="form-inline position-relative my-2 d-inline-block">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-search position-absolute" type="submit"><i
+                            class="icon ion-md-search"></i></button>
+                </form>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            {{#each user}}
+                            <img src="{{ imageURL }}" class="img-fluid rounded-circle avatar mr-2">
+                            {{ name }}
+                            {{/each}}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <!-- MI PERFIL DATOS-->
+        <div class="container p-3">
+            <h3 class="font-weight-bold mb-0">Datos Físicos</h3>
+            <div class="col-md-4 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Ficha Física</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/addFicha" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="documentoI" maxlength="8" size="15" class="form-control"
+                                    placeholder="Documento de identidad" autofocus>
+
+                            </div>
+                            <div class="form-group" autofocus>
+                                <p>
+                                    Género: <input type="radio" name="genero" id="genero" value="Femenino">Femenino
+                                    <input type="radio" name="genero" id="genero" value="Masculino">Masculino
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <p>Fecha de Nacimiento: <input type="date" class="form-control" name="fechaNacimiento"
+                                        id="fechaNacimiento"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <p>
+                                    Estado Civil: <input type="radio" id="civil" name="civil" value="soltero">Soltero
+                                    <input type="radio" name="civil" id="civil" value="casado">Casado
+                                    <input type="radio" name="civil" id="civil" value="otro">Otro
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                País:
+                                <label for="pais"></label>
+                                <select name="pais" id="pais" class="form-control">
+                                    <option>España</option>
+                                    <option>México</option>
+                                    <option>Colombia</option>
+                                    <option>Perú</option>
+                                    <option>Chile</option>
+                                    <option>Argentina</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Tipo de sangre</label>
+                                <select name="tipoSangre" class="form-control">
+                                    <option>O-</option>
+                                    <option>O+</option>
+                                    <option>A-</option>
+                                    <option>A+</option>
+                                    <option>B-</option>
+                                    <option>B+</option>
+                                    <option>AB-</option>
+                                    <option>AB+</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="seguroM" class="form-control" placeholder="SEGURO MÉDICO">
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Enfermedad Previa</label>
+                                <select name="enfermedadPrevia" class="form-control">
+                                    <option>Diabetes</option>
+                                    <option>Presión Alta</option>
+                                    <option>Enfermedad Cardiaca</option>
+                                    <option>Asma</option>
+                                    <option>Sin enfermedad</option>
+                                    <option>Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Alergias</label>
+                                <select name="alergias" class="form-control">
+                                    <option>Si</option>
+                                    <option>No</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block" type="submit">
+                                    Save
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

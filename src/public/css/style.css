@@ -1,0 +1,70 @@
+:root {
+  --primary: #00416d;
+  --light: #fbdcc4;
+  --grey: #81b214;
+  --hov: #a35d6a;
+}
+
+#sidebarUsuario {
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: var(--primary);
+}
+a:hover {
+  text-decoration: none;
+}
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+.btn {
+  border: 0;
+}
+.bg-light {
+  background-color: #ffffff !important;
+}
+.btn-primary {
+  background-color: var(--grey);
+}
+.btn-primary:hover {
+  background-color: var(--primary);
+}
+.bg-mix {
+  background: linear-gradient(180deg, #ffffff 50%, #d8d3cd 0);
+}
+.bg-grey {
+  background-color: #d8d3cd !important;
+}
+#sidebar-container {
+  min-height: 100vh;
+}
+#sidebar-container .logo {
+  padding: 0.875rem 1.25rem;
+}
+#sidebar-container .menu {
+  width: 15rem;
+}
+.btn-search {
+  right: 8px;
+}
+.avatar {
+  max-width: 35px;
+}
+/*#content {
+  overflow: auto;
+  height: 100vh;
+  padding-bottom: 5rem;
+}*/
+.stat {
+  border-right: 1px solid #d8d3cd;
+}
+
+.div {
+  border-width: 1px solid #d8d3cd;
+}
+
+@media (max-width: 760px) {
+  #sidebar-container {
+    display: none;
+  }
+}

@@ -1,0 +1,90 @@
+<div class="d-flex" id="sidebarUsuario">
+    <div id="sidebar-container" class="bg-primary">
+        <div class="logo">
+            <h4 class=" text-light text-center ">USUARIO</h4>
+        </div>
+        <div class="menu">
+            <a href="/panelUsu" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Cursos</a>
+            <a href="/misDatosFisicos" class="d-block  text-light p-3"><i
+                    class="icon ion-md-clipboard mr-2 lead"></i>Datos
+                Físicos</a>
+            <a href="/misCursos" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Mis
+                Cursos</a>
+            <a href="/miPerfil" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
+            <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-cash mr-2 lead"></i>Pagos</a>
+        </div>
+    </div>
+    <div class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <form class="form-inline position-relative my-2 d-inline-block">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-search position-absolute" type="submit"><i
+                            class="icon ion-md-search"></i></button>
+                </form>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            {{#each user}}
+                            <img src="{{ imageURL }}" class="img-fluid rounded-circle avatar mr-2">
+                            {{ name }}
+                            {{/each}}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <!-- MIS DATOS FÍSICOS-->
+        <div class="container p-3">
+            <h3 class="font-weight-bold mb-0">DATOS FÍSICOS</h3>
+            <div class="row">
+                {{#each formM}}
+                <div class="card mx-auto">
+                    <div class="card-body mt-4">
+                        <h4 class="card-title" d-flex justify-content-between align-items-center>
+                            Ficha Médica <a href="/citas/edit/{{ id }}"><i class="fas fa-edit"></i></a>
+                        </h4>
+                        </p>Documento de Identidad<div class="form-group">
+                            <input type="text" name="documentoI" class="form-control" autofocus value="{{ documentoI}}"
+                                disabled>
+                            </p>
+
+                        </div>
+                        <div class="form-group">
+                            </p>Género: <input type="text" name="documentoI" class="form-control" autofocus
+                                value="{{ genero }}" disabled></p>
+
+                        </div>
+                        <div class="form-group">
+                            </p>País: <input type="text" name="documentoI" class="form-control" autofocus
+                                value="{{ pais }}" disabled></p>
+
+                        </div>
+                        <div class="form-group">
+                            </p>Estado Civil: <input type="text" name="documentoI" class="form-control" autofocus
+                                value="{{ civil }}" disabled></p>
+
+                        </div>
+                    </div>
+                </div>
+                {{else}}
+                <div class="card mx-auto">
+                    <div class="card-body">
+                        <h1>Hello {{name}}</h1>
+                        <p class="lead">No has llenado tu ficha física</p>
+                        <a href="/addDatosFis" class="btn btn-info btn-lg btn-block">Ingresar!</a>
+
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+</div>

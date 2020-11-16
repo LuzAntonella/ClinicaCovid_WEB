@@ -1,0 +1,21 @@
+{{#each user}}
+<img src="{{ imageURL }}" class="img-fluid rounded-circle avatar mr-2">
+{{ name }}
+{{ role }}
+<input name="rol" id="rol" value="{{role}}">
+
+
+<script type="text/javascript">
+    console.log("Esto es un mensaje en la consola");
+    var rol = document.getElementById("rol").value;
+    if (rol === 'admin')
+        window.location.href = "http://localhost:3000/moduloU";
+
+    else {
+        //window.location.href = "http://localhost:3000/panelUsu";
+        window.location.href = "http://localhost:3000/moduloU";
+    }
+</script>
+
+
+{{/each}}
