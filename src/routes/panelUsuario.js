@@ -9,27 +9,27 @@ const cloudinary = require('cloudinary');
 const { isAuthenticated } = require('../helpers/auth');
 
 router.get('/panelUsu', isAuthenticated,async (req, res) => {
-  await Cita.find({cita: req.body._id})
+  await Cita.find({cita: req.body.codigoCita})
     .then(documentos => {
       const contexto = {
-          Curso: documentos.map(documento => {
-          return {
-              codigoCurso: documento.codigoCurso,
-              nameCurso: documento.nameCurso,
-              docenteCurso : documento.docenteCurso,
-              costoCurso : documento.costoCurso,
-              descripcionCurso: documento.descripcionCurso,
-              id: documento._id,
-              
-          }
+        Cita: documentos.map(documento => {
+        return {
+            codigoCita: documento.codigoCita,
+            personalCita: documento.personalCita,
+            costoCita: documento.costoCita,
+            horaCita: documento.horaCita,
+            fechaCita: documento.fechaCita,
+            descripcionCita: documento.descripcionCita,
+            id: documento._id,
+        }
         })
-      }
-      res.render('panelUsuario/elegirCurso', {Curso: contexto.Curso}); 
+    }
+    res.render('panelUsuario/elegirCita', {Cita: contexto.Cita}); 
     });
 });
 
-router.get('/misCursos', isAuthenticated,(req, res) => {
-  res.render('panelUsuario/misCursos');
+router.get('/misCitas', isAuthenticated,(req, res) => {
+  res.render('panelUsuario/misCitas');
 });
 router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
   await FormMedico.find({user: req.user.id})
@@ -54,7 +54,7 @@ router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
 
 //-------------------------
 router.get('/miPerfil', isAuthenticated,(req, res) => {
-  res.render('panelUsuario/perfil');
+  res.render('panelUsuario/perfilG');
 });
 router.get('/addDatosFis',isAuthenticated,(req, res) => {
   res.render('panelUsuario/addDatosF');

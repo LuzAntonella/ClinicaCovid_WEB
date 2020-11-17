@@ -7,7 +7,7 @@
             <a href="/panelUsu" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Citas</a>
             <a href="/misDatosFisicos" class="d-block  text-light p-3"><i
                     class="icon ion-md-clipboard mr-2 lead"></i>Ficha Médica</a>
-            <a href="/misCursos" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Mis
+            <a href="/misCitas" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Mis
                 Citas</a>
             <a href="/miPerfil" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
             <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-cash mr-2 lead"></i>Pagos</a>
@@ -39,48 +39,44 @@
                 </div>
             </div>
         </nav>
-        <!-- MIS CURSOS -->
-        <div id="content">
-            <section class="py-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <h3 class="font-weight-bold mb-0">MI CITA</h3>
-                        </div>
-                    </div>
+        <!-- MI PERFIL DATOS-->
+        <div class="container p-3">
+            <h3 class="font-weight-bold mb-0">PERFIL</h3>
+            <div class="card mx-auto" style="width: 50rem;">
+                <div class="card-header">
+                    Información Personal
                 </div>
-            </section>
-
-            <div class="container p-3">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="table-responsive">
-                            <table id="tablaCursos" class="table table-striped table-bordered table-condensed "
-                                style="width: 100%;">
-                                <thead class="text-center">
-                                    <tr>
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Docente</th>
-                                        <th>Costo</th>
-                                    </tr>
-                                </thead>
-                                {{#each Curso }}
-
-                                <body>
-                                    <tr>
-                                        <td>{{ codigoCurso }}</td>
-                                        <td>{{ nameCurso }}</td>
-                                        <td>{{ descripcionCurso }}</td>
-                                        <td>{{ docenteCurso }}</td>
-                                        <td>{{ costoCurso }}</td>
-                                    </tr>
-                                </body>
-                                {{/each}}
-                            </table>
-                        </div>
-                    </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <h5>DNI</h5>
+                        {{#each user}}
+                        {{ dni }}
+                        {{/each}}
+                        <h5>Nombre</h5>
+                        {{#each user}}
+                        {{ name }}
+                        {{/each}}
+                        <h5>Apellido</h5>
+                        {{#each user}}
+                        {{ apellido }}
+                        {{/each}}
+                        <h5>Género</h5>
+                        {{#each user}}
+                        {{ genero }}
+                        {{/each}}
+                        <h5>Teléfono</h5>
+                        {{#each user}}
+                        {{ telefono }}
+                        {{/each}}
+                        <h5>Email</h5>
+                        {{#each user}}
+                        {{ email }}
+                        {{/each}}
+                        <h5>Fecha Nacimiento</h5>
+                        {{#each user}}
+                        {{ fechaNacimiento }}
+                        {{/each}}
+                    </blockquote>
                 </div>
             </div>
         </div>

@@ -55,7 +55,14 @@ router.get('/usuariosAdmin', isAuthenticated, async (req, res) => {
         res.render('panelAdmin/usuariosAdmin', {User: contexto.User}); 
       });
 });
+//eliminar un usuario
+router.delete('/usuario/delete/:id',isAuthenticated, async (req,res) => {
+    await User.findByIdAndDelete(req.params.id);
+    req.flash('success_msg','Usuario Deleted Successfully');
+    res.redirect('/usuariosAdmin');
+});
 
+//mostrar Personal Médico
 router.get('/personalMAdmin',isAuthenticated,async (req, res) => {
     await PerMedico.find({PerMedico: req.body._id})
     
@@ -124,7 +131,14 @@ router.post('/personalMAdmin', async (req, res) =>{
    
 });
 
-//mostrar lista de personal
+//eliminar un médico
+router.delete('/personal/delete/:id',isAuthenticated, async (req,res) => {
+    await PerMedico.findByIdAndDelete(req.params.id);
+    req.flash('success_msg','Persona Deleted Successfully');
+    res.redirect('/personalMAdmin');
+});
+
+/*mostrar lista de personal
 router.get('/citasAdmin',isAuthenticated,async (req, res) => {
     await PerMedico.find({PerMedico: req.body.docenteCurso})
       .then(documentos => {
@@ -140,51 +154,56 @@ router.get('/citasAdmin',isAuthenticated,async (req, res) => {
         }
         res.render('panelAdmin/citasAdmin', {Personal: contexto.Personal}); 
       });
-});
+});*/
 
 //mostrar Citas
-/*router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
-    await Cita.find({cita: req.body.codigoCurso})
+router.get('/citasAdmin',isAuthenticated,async (req, res) => {
+    await Cita.find({cita: req.body.codigoCita})
     .then(documentos => {
     const contexto = {
-        Curso: documentos.map(documento => {
+        Cita: documentos.map(documento => {
         return {
-            codigoCurso: documento.codigoCurso,
-            nameCurso: documento.nameCurso,
-            docenteCurso: documento.docenteCurso,
-            costoCurso: documento.costoCurso,
-            descripcionCurso: documento.descripcionCurso,
-
+            codigoCita: documento.codigoCita,
+            personalCita: documento.personalCita,
+            costoCita: documento.costoCita,
+            horaCita: documento.horaCita,
+            fechaCita: documento.fechaCita,
+            descripcionCita: documento.descripcionCita,
+            id: documento._id,
         }
         })
     }
-    res.render('panelAdmin/cursosAdmin', {Curso: contexto.Curso}); 
+    res.render('panelAdmin/citasAdmin', {Cita: contexto.Cita}); 
     });
-});*/
+});
 
 //recibir datos de registro CITAS
 router.post('/citasAdmin', async (req, res) =>{
-    const {codigoCurso,nameCurso,docenteCurso,costoCurso,descripcionCurso} = req.body;
+    const {codigoCita,personalCita,costoCita,horaCita,fechaCita,descripcionCita} = req.body;
     const errors = [];
     
-    if(!codigoCurso){
-        errors.push({text: 'Por favor inserte el codigo del curso'});
+    if(!codigoCita){
+        errors.push({text: 'Por favor inserte el codigo de la cita'});
     }
-    if(!nameCurso){
-        errors.push({text: 'Por favor inserte su nombre del curso'});
+    if(!personalCita){
+        errors.push({text: 'Por favor inserte un médico'});
     }
-    if(!docenteCurso){
-        errors.push({text: 'Por favor elija un docente para el curso'});
+    if(!horaCita){
+        errors.push({text: 'Por favor inserte una hora de cita'});
+    }
+    if(!fechaCita){
+        errors.push({text: 'Por favor inserte una fecha de cita'});
     }
     if (errors.length > 0){
-        res.render('panelAdmin/citasAdmin', {errors,codigoCurso,nameCurso,docenteCurso,costoCurso,descripcionCurso});
+        res.render('panelAdmin/citasAdmin', {errors,codigoCita,personalCita,costoCita,horaCita,fechaCita,descripcionCita});
     }else{
         const newCita = new Cita({
-            codigoCurso,
-            nameCurso,
-            docenteCurso,
-            costoCurso,
-            descripcionCurso,
+            codigoCita,
+            personalCita,
+            costoCita,
+            horaCita,
+            fechaCita,
+            descripcionCita,
         });
         await newCita.save();
         req.flash('success_msg','You are registered');
@@ -193,4 +212,15 @@ router.post('/citasAdmin', async (req, res) =>{
    
 });
 
+//eliminar una cita
+router.delete('/cita/delete/:id',isAuthenticated, async (req,res) => {
+    await Cita.findByIdAndDelete(req.params.id);
+    req.flash('success_msg','Persona Deleted Successfully');
+    res.redirect('/citasAdmin');
+});
+
+//mostrar perfil
+router.get('/perfilU', isAuthenticated, async (req, res) => {
+        res.render('panelAdmin/perfilA'); 
+});
 module.exports = router;

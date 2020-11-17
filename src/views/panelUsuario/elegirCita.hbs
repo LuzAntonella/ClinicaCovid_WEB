@@ -7,7 +7,7 @@
             <a href="/panelUsu" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Citas</a>
             <a href="/misDatosFisicos" class="d-block  text-light p-3"><i
                     class="icon ion-md-clipboard mr-2 lead"></i>Ficha Médica</a>
-            <a href="/misCursos" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Mis
+            <a href="/misCitas" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Mis
                 Citas</a>
             <a href="/miPerfil" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
             <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-cash mr-2 lead"></i>Pagos</a>
@@ -41,21 +41,73 @@
         </nav>
         <div id="content">
             <section class="py-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <p class="lead text-muted">Elije otra fecha de Calendario</p>
+                        </div>
+                        <div class="col-lg-3 d-flex">
+                            <button class="btn  w-100 align-self-center text-light" style="background-color: #ffa45b;"
+                                data-toggle="modal" data-target="#modalDate" data-whatever="@mdo">Calendario</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL -->
+                <div class="modal fade" id="modalDate" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Calendario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Calendario -->
+                                <form>
+                                    <section class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="input-group" id="datetimepicker">
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-addon">
+                                                    <span class="icon ion-md-apps"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker').datetimepicker();
+                                        });
+                                    </script>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Go</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-1">
                 <div class="row">
-                    {{#each Curso}}
+                    {{#each Cita}}
                     <div class="col-md-4">
-                        <div class="container">
-                            <div class="card" style="width: 15rem;">
+                        <div class="container p-3">
+                            <div class="card mx-auto" style="width: 15rem;">
 
                                 <div class="card-body">
-                                    <i class="icon ion-md-folder mr-2 lead"></i>Curso<p class="card-title">{{nameCurso}}
+                                    <i class="icon ion-md-folder mr-2 lead"></i>Cita<p class="card-title">{{codigoCita}}
                                     </p>
-                                    Descripción<p class="card-text">{{descripcionCurso}}</p>
+                                    Descripción<p class="card-text">{{descripcionCita}}</p>
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <div class="card-body">
-                                        <i class="icon ion-md-person mr-2 lead"></i>Docente<p class="card-title">
-                                            {{docenteCurso}}
+                                        <i class="icon ion-md-person mr-2 lead"></i>P.Médica<p class="card-title">
+                                            {{personalCita}}
                                         </p>
                                     </div>
 
@@ -63,15 +115,18 @@
                                 <ul class="list-group list-group-flush">
                                     <div class="card-body">
                                         <i class="icon ion-md-cash mr-2 lead"></i>Costo $ <p class="card-text">
-                                            {{costoCurso}}</p>
+                                            {{costoCita}}</p>
+                                        <i class="icon ion-md-calendar mr-2"></i>Fecha y Hora <p class="card-text">
+                                            {{fechaCita}} {{horaCita}}</p>
                                     </div>
+
 
                                 </ul>
                                 <!-- Button trigger modal -->
                                 <div class="card-body">
                                     <button class="btn btnEditar text-light center" style="background-color: #81b214;"
                                         data-toggle="modal" data-toggle="modal"
-                                        data-target="#staticBackdrop">Matricularse</button>
+                                        data-target="#staticBackdrop">Registrarse</button>
 
                                 </div>
                                 <!-- Modal -->
@@ -80,17 +135,17 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Matrícula</h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">Registro</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Desea matricularse en este curso?
+                                                ¿Desea registrarse en esta cita?
                                             </div>
                                             <div class="modal-footer">
-                                                <a class="nav-link" href="/misCursos">
+                                                <a class="nav-link" href="/misCitas">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-primary">Yes</button>
@@ -109,3 +164,14 @@
         </div>
     </div>
 </div>
+<!--BDP -->
+<script src="/bootstrap-datepicker/js/bootstrap-datepicker.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="/bootstrap-datepicker/css/bootstrap-datepicker.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+    integrity="sha256-t9UJPrESBeG2ojKTIcFLPGF7nHi2vEc7f5A2KpH/UBU=" crossorigin="anonymous"></script>

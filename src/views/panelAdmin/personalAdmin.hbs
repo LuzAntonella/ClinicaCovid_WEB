@@ -10,7 +10,7 @@
             <a href="/personalMAdmin" class="d-block  text-light p-3"><i
                     class="icon ion-md-people mr-2 lead"></i>Personal Médico</a>
             <a href="/citasAdmin" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Citas</a>
-            <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
+            <a href="/perfilU" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
             <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
         </div>
     </div>
@@ -173,9 +173,17 @@
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">
-                                                        <button class="btn btnEditar text-light"
+                                                        <button class="btn btnEditar btn-sm text-light"
                                                             style="background-color: blue;">Editar</button>
-                                                        <button class="btn btn-danger btnEliminar">Borrar</button>
+                                                        <form action="/personal/delete/{{ id }}?_method=DELETE"
+                                                            method="POST">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button class="btn btn-danger btnEliminar btn-sm"
+                                                                type="submit">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+
                                                     </div>
                                                 </div>
                                             </td>

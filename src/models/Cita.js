@@ -3,11 +3,12 @@ const { Schema } = mongoose;
 
 
 const CitaSchema = new Schema({
-    codigoCurso:{ type:String, required:true},
-    nameCurso: { type:String, required:true},
-    docenteCurso: { type:String, required:true},
-    costoCurso: { type:Number, required:true},
-    descripcionCurso: { type:String, required:true},
+    codigoCita:{ type:String, required:true},
+    personalCita: { type:String, required:true},
+    costoCita: { type:Number, required:true},
+    descripcionCita: { type:String, required:true},
+    horaCita: { type:String, required:true},
+    fechaCita: { type:String, required:true},
     date: { type:Date, default: Date.now }
     
 });

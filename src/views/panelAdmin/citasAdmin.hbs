@@ -10,7 +10,7 @@
             <a href="/personalMAdmin" class="d-block  text-light p-3"><i
                     class="icon ion-md-people mr-2 lead"></i>Personal Médico</a>
             <a href="/citasAdmin" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Citas</a>
-            <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
+            <a href="/perfilU" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
             <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
         </div>
     </div>
@@ -59,21 +59,18 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="/cursosAdmin" method="POST" enctype="multipart/form-data">
+                                <form action="/citasAdmin" method="POST" enctype="multipart/form-data">
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="codigoCurso"
+                                            <input type="text" class="form-control" name="codigoCita"
                                                 placeholder="Código">
                                         </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="nameCurso"
-                                                placeholder="Nombre">
-                                        </div>
+
                                         <div class="form-group row">
                                             <label for="inputEmail3"
                                                 class="col-sm-4 col-form-label lead text-muted font-weight-bold">Personal
                                                 Médico</label>
-                                            <select class="col-sm-5 form-control" name="docenteCurso">
+                                            <select class="col-sm-5 form-control" name="personalCita">
                                                 <option selected>Elije médico</option>
                                                 {{#each Personal }}
 
@@ -85,12 +82,29 @@
                                         <div class="form-group">
                                             <label for="inputEmail3"
                                                 class="col-sm-4 col-form-label lead text-muted font-weight-bold">Costo</label>
-                                            <input type="number" class="col-sm-5 form-control" name="costoCurso"
+                                            <input type="number" class="col-sm-5 form-control" name="costoCita"
                                                 value="150" placeholder="Costo">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail3"
+                                                class="col-sm-4 col-form-label lead text-muted font-weight-bold">Hora
+                                                Cita</label>
+                                            <input type="time" class="col-sm-5 form-control" name="horaCita" value="150"
+                                                placeholder="Costo">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3"
+                                                class="col-sm-5 col-form-label lead text-muted font-weight-bold">Fecha
+                                                Cita</label>
+                                            <div class="col-sm-7">
+                                                <input type="date" class="form-control" name="fechaCita"
+                                                    placeholder="Email">
+                                            </div>
                                         </div>
                                         <div class="form-group">
 
-                                            <textarea class="form-control" name="descripcionCurso"
+                                            <textarea class="form-control" name="descripcionCita"
                                                 placeholder="Descripción"></textarea>
                                         </div>
 
@@ -115,27 +129,39 @@
                                     <thead class="text-center">
                                         <tr>
                                             <th>Código</th>
-                                            <th>Nombre</th>
                                             <th>Profesional</th>
                                             <th>Costo</th>
+                                            <th>Hora</th>
+                                            <th>Fecha</th>
+                                            <th>Descripcion</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                    {{#each Curso }}
+                                    {{#each Cita}}
 
                                     <body>
                                         <tr>
-                                            <td>{{ codigoCurso }}</td>
-                                            <td>{{ nameCurso }}</td>
-                                            <td>{{ docenteCurso }}</td>
-                                            <td>{{ costoCurso }}</td>
-
+                                            <td>{{ codigoCita }}</td>
+                                            <td>{{ personalCita }}</td>
+                                            <td>{{ costoCita }}</td>
+                                            <td>{{ horaCita }}</td>
+                                            <td>{{ fechaCita }}</td>
+                                            <td>{{ descripcionCita }}</td>
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">
-                                                        <button class="btn btnEditar text-light"
-                                                            style="background-color: blue;">Editar</button>
-                                                        <button class="btn btn-danger btnEliminar">Borrar</button>
+                                                        <button class="btn btnEditar btn-sm text-light"
+                                                            style="background-color: blue;" data-toggle="modal"
+                                                            data-target="#exampleModal"
+                                                            data-whatever="@mdo">Editar</button>
+                                                        <form action="/cita/delete/{{ id }}?_method=DELETE"
+                                                            method="POST">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button class="btn btn-danger btnEliminar btn-sm"
+                                                                type="submit">
+                                                                Delete
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </td>
