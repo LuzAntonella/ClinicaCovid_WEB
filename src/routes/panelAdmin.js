@@ -61,7 +61,7 @@ router.get('/personalMAdmin',isAuthenticated,async (req, res) => {
     
       .then(documentos => {
         const contexto = {
-            Docente: documentos.map(documento => {
+            Personal: documentos.map(documento => {
             return {
                 dni: documento.dni,
                 name: documento.name,
@@ -75,17 +75,17 @@ router.get('/personalMAdmin',isAuthenticated,async (req, res) => {
             }
           })
         }
-        res.render('panelAdmin/personalAdmin', {Docente: contexto.Docente}); 
+        res.render('panelAdmin/personalAdmin', {Personal: contexto.Personal}); 
       });
 });
 
-//recibir datos de registro DOCENTE
+//recibir datos de registro PERSONAL MEDICO
 router.post('/personalMAdmin', async (req, res) =>{
     const {dni,name,apellido,genero,telefono,email,profesion,fechaNacimiento} = req.body;
     const errors = [];
-    console.log(req.file);
+    //console.log(req.file);
     const result = await cloudinary.v2.uploader.upload(req.file.path);
-    console.log(result);
+    //console.log(result);
     if(!name){
         errors.push({text: 'Por favor inserte su nombre'});
     }
@@ -124,29 +124,25 @@ router.post('/personalMAdmin', async (req, res) =>{
    
 });
 
-router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
-    await PerMedico.find({PerMedico: req.body._id})
-    
-    .then(documentos => {
-      const contexto = {
-          Docente: documentos.map(documento => {
-          return {
-              dni: documento.dni,
-              name: documento.name,
-              apellido: documento.apellido,
-              telefono: documento.telefono,
-              email: documento.email,
-              profesion: documento.profesion,
-              image: documento.imageURL,
-              id: documento._id,
-              
-          }
-        })
-      }
-      res.render('panelAdmin/cursosAdmin', {Docente: contexto.Docente}); 
-    });  
+//mostrar lista de personal
+router.get('/citasAdmin',isAuthenticated,async (req, res) => {
+    await PerMedico.find({PerMedico: req.body.docenteCurso})
+      .then(documentos => {
+        const contexto = {
+            Personal: documentos.map(documento => {
+            return {
+                name: documento.name,
+                apellido : documento.apellido,
+                image: documento.imageURL,
+                id: documento._id,
+            }
+          })
+        }
+        res.render('panelAdmin/citasAdmin', {Personal: contexto.Personal}); 
+      });
 });
 
+//mostrar Citas
 /*router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
     await Cita.find({cita: req.body.codigoCurso})
     .then(documentos => {
@@ -165,8 +161,9 @@ router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
     res.render('panelAdmin/cursosAdmin', {Curso: contexto.Curso}); 
     });
 });*/
-//recibir datos de registro Cursos
-router.post('/cursosAdmin', async (req, res) =>{
+
+//recibir datos de registro CITAS
+router.post('/citasAdmin', async (req, res) =>{
     const {codigoCurso,nameCurso,docenteCurso,costoCurso,descripcionCurso} = req.body;
     const errors = [];
     
@@ -180,7 +177,7 @@ router.post('/cursosAdmin', async (req, res) =>{
         errors.push({text: 'Por favor elija un docente para el curso'});
     }
     if (errors.length > 0){
-        res.render('panelAdmin/cursosAdmin', {errors,codigoCurso,nameCurso,docenteCurso,costoCurso,descripcionCurso});
+        res.render('panelAdmin/citasAdmin', {errors,codigoCurso,nameCurso,docenteCurso,costoCurso,descripcionCurso});
     }else{
         const newCita = new Cita({
             codigoCurso,
@@ -191,7 +188,7 @@ router.post('/cursosAdmin', async (req, res) =>{
         });
         await newCita.save();
         req.flash('success_msg','You are registered');
-        res.redirect('/cursosAdmin');
+        res.redirect('/citasAdmin');
     }
    
 });

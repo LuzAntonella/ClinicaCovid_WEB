@@ -37,9 +37,6 @@ router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
         const contexto = {
             formM: documentos.map(documento => {
             return {
-                documentoI: documento.documentoI,
-                genero : documento.genero,
-                fechaNacimiento : documento.fechaNacimiento,
                 civil: documento.civil,
                 pais: documento.pais,
                 tipoSangre: documento.tipoSangre,
@@ -65,24 +62,24 @@ router.get('/addDatosFis',isAuthenticated,(req, res) => {
 
 //aqui guardo los datos en la BD(esto es de formulario medico)
 router.post('/addFicha', isAuthenticated,async (req,res) => {
-  const {documentoI, genero, fechaNacimiento, civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias}= req.body;
+  const {civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias}= req.body;
   const errors =[];
-  if(!documentoI){
-      errors.push({text:'Por favor inserte su documento de identidad'});
+  if(!civil){
+      errors.push({text:'Por favor inserte su estado civil'});
   }
-  if(!genero){
-      errors.push({text:'Por favor inserte su género'});
+  if(!tipoSangre){
+      errors.push({text:'Por favor inserte su tipo de Sangre'});
   }
-  if(!fechaNacimiento){
-      errors.push({text:'Por favor inserte su fecha de nacimiento'});
+  if(!alergias){
+      errors.push({text:'Por favor inserte el campo alergias'});
+  }
+  if(!seguroM){
+    errors.push({text:'Por favor inserte el campo seguro'});
   }
   //falta validar los demas datos
   if(errors.length > 0){
       res.render('panelUsuario/addDatosF',{
           errors,
-          documentoI,
-          genero,
-          fechaNacimiento,
           civil,
           pais,
           tipoSangre,
@@ -91,7 +88,7 @@ router.post('/addFicha', isAuthenticated,async (req,res) => {
           alergias
       });
   } else{
-      const newFormMedico = new FormMedico({documentoI, genero, fechaNacimiento, civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias});
+      const newFormMedico = new FormMedico({civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias});
       //enlazo para cada uno
       newFormMedico.user = req.user.id;
       await newFormMedico.save();
@@ -100,5 +97,51 @@ router.post('/addFicha', isAuthenticated,async (req,res) => {
       res.redirect('/misDatosFisicos');
 
   }
+});
+
+//-----Actualizar Ficha Medica
+router.get('/fichaM/edit/:id',isAuthenticated, async (req, res) => {
+
+  const datosF = await FormMedico.findById(req.params.id)
+  .then(data =>{
+      return {
+          civil:data.civil,
+          pais:data.pais,
+          tipoSangre:data.tipoSangre,
+          seguroM: data.seguroM,
+          enfermedadPrevia : data.enfermedadPrevia,
+          alergias : data.alergias,
+          id:data.id
+      }
+  })
+  res.render('panelUsuario/edit-datosF',{datosF})
+});
+
+router.put('/fichaM/edit-fichaM/:id', isAuthenticated,async (req, res) =>{
+  const {civil,pais,tipoSangre,seguroM,enfermedadPrevia,alergias} = req.body;
+  const errors =[];
+  if(!civil){
+    errors.push({text:'Por favor inserte su estado civil'});
+  }
+  if(!tipoSangre){
+    errors.push({text:'Por favor inserte su tipo de Sangre'});
+  }
+  if(errors.length > 0){
+    res.render('panelUsuario/edit-datosF',{
+        errors,
+        civil,
+        pais,
+        tipoSangre,
+        seguroM,
+        enfermedadPrevia,
+        alergias
+  });
+  }else{
+    //actualizar
+   await FormMedico.findByIdAndUpdate(req.params.id,{civil,pais,tipoSangre,seguroM,enfermedadPrevia,alergias});
+   req.flash('success_msg','Ficha Médica Updated Successfully');
+   res.redirect(('/misDatosFisicos'));
+  }
+  
 });
 module.exports = router;

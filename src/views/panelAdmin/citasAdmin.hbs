@@ -9,7 +9,7 @@
                     class="icon ion-md-contacts mr-2 lead"></i>Usuarios</a>
             <a href="/personalMAdmin" class="d-block  text-light p-3"><i
                     class="icon ion-md-people mr-2 lead"></i>Personal Médico</a>
-            <a href="/cursosAdmin" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Citas</a>
+            <a href="/citasAdmin" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Citas</a>
             <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
             <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
         </div>
@@ -30,10 +30,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
-
-                            <!-- <img src="assets/img/antonella.jpeg" class="img-fluid rounded-circle avatar mr-2">
-                            Luz Antonella -->
-
+                            {{#each user}}
+                            <img src="{{ imageURL }}" class="img-fluid rounded-circle avatar mr-2">
+                            {{ name }}
+                            {{/each}}
                         </li>
                     </ul>
 
@@ -71,18 +71,22 @@
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputEmail3"
-                                                class="col-sm-5 col-form-label lead text-muted font-weight-bold">Personal
+                                                class="col-sm-4 col-form-label lead text-muted font-weight-bold">Personal
                                                 Médico</label>
-                                            <select class="col-sm-6 form-control" name="docenteCurso">
+                                            <select class="col-sm-5 form-control" name="docenteCurso">
                                                 <option selected>Elije médico</option>
-                                                {{#each Docente }}
-                                                <option value="{{ name }}">{{ name }}</option>
+                                                {{#each Personal }}
+
+                                                <option value="{{ name }} {{ apellido }}">{{ name }} {{ apellido }}
+                                                </option>
                                                 {{/each}}
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <input type="number" class="form-control" name="costoCurso"
-                                                placeholder="Costo">
+                                            <label for="inputEmail3"
+                                                class="col-sm-4 col-form-label lead text-muted font-weight-bold">Costo</label>
+                                            <input type="number" class="col-sm-5 form-control" name="costoCurso"
+                                                value="150" placeholder="Costo">
                                         </div>
                                         <div class="form-group">
 
@@ -94,8 +98,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" id="btn-guardar">Send
-                                            message</button>
+                                        <button type="submit" class="btn btn-primary"
+                                            id="btn-guardar">Registrar</button>
                                     </div>
                                 </form>
                             </div>

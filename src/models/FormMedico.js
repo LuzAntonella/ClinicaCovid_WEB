@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const FormMedicoSchema = new Schema({
-    documentoI: { type:String, required:true},
-    genero: { type:String, required:true },
-    fechaNacimiento : { type:Date, required:true },
     civil : { type:String, required:true },
     pais : { type:String, required:true },
     tipoSangre : { type:String, required:true },

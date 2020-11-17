@@ -4,9 +4,9 @@
             <h4 class=" text-light text-center ">USUARIO</h4>
         </div>
         <div class="menu">
-            <a href="/panelUsu" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Cita</a>
+            <a href="/panelUsu" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Citas</a>
             <a href="/misDatosFisicos" class="d-block  text-light p-3"><i
-                    class="icon ion-md-clipboard mr-2 lead"></i>Ficha Médica</a>
+                    class="icon ion-md-clipboard mr-2 lead"></i>Ficha Física</a>
             <a href="/misCursos" class="d-block  text-light p-3"><i class="icon ion-md-folder mr-2 lead"></i>Mis
                 Citas</a>
             <a href="/miPerfil" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
@@ -39,16 +39,17 @@
                 </div>
             </div>
         </nav>
-        <!-- MI PERFIL DATOS-->
+        <!-- MIS DATOS FÍSICOS-->
         <div class="container p-3">
-            <h3 class="font-weight-bold mb-0">Datos Físicos</h3>
+            <h3 class="font-weight-bold mb-0"> EDIT FICHA MÉDICA</h3>
             <div class="col-md-4 mx-auto">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Ficha Física</h3>
+                        <h3>Edit Ficha Médica</h3>
                     </div>
                     <div class="card-body">
-                        <form action="/addFicha" method="POST">
+                        <form action="/fichaM/edit-fichaM/{{datosF.id}}?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
                             <div class="form-group">
                                 <p>
                                     Estado Civil: <input type="radio" id="civil" name="civil" value="soltero">Soltero
@@ -60,6 +61,7 @@
                                 País:
                                 <label for="pais"></label>
                                 <select name="pais" id="pais" class="form-control">
+                                    <option>{{datosF.pais}}</option>
                                     <option>España</option>
                                     <option>México</option>
                                     <option>Colombia</option>
@@ -71,6 +73,7 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Tipo de sangre</label>
                                 <select name="tipoSangre" class="form-control">
+                                    <option>{{datosF.tipoSangre}}</option>
                                     <option>O-</option>
                                     <option>O+</option>
                                     <option>A-</option>
@@ -83,13 +86,14 @@
                             </div>
                             <div class="form-group">
                                 Seguro Médico:
-                                <input type="text" name="seguroM" class="form-control" placeholder="SEGURO MÉDICO">
+                                <input type="text" name="seguroM" class="form-control" value="{{ datosF.seguroM }}">
 
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Enfermedad Previa</label>
                                 <select name="enfermedadPrevia" class="form-control">
+                                    <option>{{ datosF.enfermedadPrevia }}</option>
                                     <option>Diabetes</option>
                                     <option>Presión Alta</option>
                                     <option>Enfermedad Cardiaca</option>
@@ -101,6 +105,7 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Alergias</label>
                                 <select name="alergias" class="form-control">
+                                    <option>{{ datosF.alergias}}</option>
                                     <option>Si</option>
                                     <option>No</option>
 
@@ -111,7 +116,6 @@
                                     Save
                                 </button>
                             </div>
-
                         </form>
                     </div>
                 </div>
