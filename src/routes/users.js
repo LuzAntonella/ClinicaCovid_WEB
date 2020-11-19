@@ -79,9 +79,15 @@ router.post('/users/signup', async (req, res) =>{
    
 });
 
-//mostrar nombre y foto del usuario(pero el retorno de datos no es necesario)
+//REDIRIGIR SEGÚN EL ROL
 router.get('/panel', isAuthenticated,async (req, res) => {
-    res.render('panelUsuario/panelG'); 
+    console.log(req.user.role);
+
+    if (req.user.role === 'admin') {
+        res.redirect('/moduloU');
+      } else {
+        res.redirect('/panelUsu');
+    }
 });
 
 /*router.get('/panelUsu', isAuthenticated,async (req, res) => {
