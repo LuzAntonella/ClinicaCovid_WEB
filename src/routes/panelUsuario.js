@@ -115,6 +115,8 @@ router.get('/fichaM/edit/:id',isAuthenticated, async (req, res) => {
       }
   })
   res.render('panelUsuario/edit-datosF',{datosF})
+ // OBSERVABLES-Eliminamos el elemento en algún momento del programa
+  datosF.parentNode.removeChild(datosF);
 });
 
 router.put('/fichaM/edit-fichaM/:id', isAuthenticated,async (req, res) =>{

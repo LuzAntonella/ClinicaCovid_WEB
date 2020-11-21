@@ -4,8 +4,8 @@ const User = require('../models/User');
 const PerMedico = require('../models/PerMedico');
 const Cita= require('../models/Cita');
 const passport = require('passport');
-const cloudinary = require('cloudinary');
 const { isAuthenticated } = require('../helpers/auth');
+const cloudinary = require('cloudinary');
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
