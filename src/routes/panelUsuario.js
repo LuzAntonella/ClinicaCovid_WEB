@@ -4,6 +4,7 @@ const FormMedico = require('../models/FormMedico')
 const User = require('../models/User');
 const PerMedico = require('../models/PerMedico');
 const Cita = require('../models/Cita');
+const RegistroCita = require('../models/RegistroCita');
 const passport = require('passport');
 const cloudinary = require('cloudinary');
 const { isAuthenticated } = require('../helpers/auth');
@@ -28,9 +29,7 @@ router.get('/panelUsu', isAuthenticated,async (req, res) => {
     });
 });
 
-router.get('/misCitas', isAuthenticated,(req, res) => {
-  res.render('panelUsuario/misCitas');
-});
+
 router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
   await FormMedico.find({user: req.user.id})
       .then(documentos => {
@@ -145,5 +144,46 @@ router.put('/fichaM/edit-fichaM/:id', isAuthenticated,async (req, res) =>{
    res.redirect(('/misDatosFisicos'));
   }
   
+});
+
+//ELEGIR CITAS
+router.post('/addElegirCita/:id', isAuthenticated,async (req,res) => {
+  console.log(req.params.id)
+  const datosF = await Cita.findById(req.params.id);
+  //console.log(datosF.nameCurso);
+  const newRegistroCita = new RegistroCita({
+      codigoCita: datosF.codigoCita,
+      personalCita: datosF.personalCita,
+      costoCita: datosF.costoCita,
+      descripcionCita: datosF.descripcionCita,
+      horaCita: datosF.horaCita,
+      fechaCita: datosF.fechaCita,
+  });
+  newRegistroCita.user = req.user.id;
+  await newRegistroCita.save();
+  req.flash('success_msg','Se ha registrado en la cita', datosF.codigoCita);
+  res.redirect(('/misCitas'));
+});
+
+router.get('/misCitas', isAuthenticated,async (req, res) => {
+  await RegistroCita.find({user: req.user.id})
+      .then(documentos => {
+        const contexto = {
+            formM: documentos.map(documento => {
+            return {
+              codigoCita: documento.codigoCita,
+              personalCita: documento.personalCita,
+              costoCita: documento.costoCita,
+              descripcionCita: documento.descripcionCita,
+              horaCita: documento.horaCita,
+              fechaCita: documento.fechaCita,
+              realizoPago: documento.realizoPago,
+              id: documento._id
+            }
+          })
+        }
+        res.render('panelUsuario/misCitas', {
+        registroCita: contexto.formM }) 
+      })
 });
 module.exports = router;

@@ -75,5 +75,25 @@
         </div>
         <div class="skew-abajo"></div>
     </section>
+    <!--Testimonios-->
+    <section class="testimonios">
+        <div class="testimonios-title">
+            <h2>Personal Médico</h2>
+            <hr>
+        </div>
 
+        <div class="box-testimonios">
+            {{#each Personal}}
+            <div class="card-testimonio">
+                <div class="card-img"><img src="{{ image }}" alt=""></div>
+                <div class="testimonio-text">
+                    <h6>{{name}} {{apellido}}</h6>
+                    <p>Profesión</p>
+                    <p>{{profesion}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </section>
 </body>

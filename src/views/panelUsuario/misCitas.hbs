@@ -60,21 +60,30 @@
                                 <thead class="text-center">
                                     <tr>
                                         <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Docente</th>
+                                        <th>Médico</th>
                                         <th>Costo</th>
+                                        <th>Descripción</th>
+                                        <th>Hora</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                {{#each Curso }}
+                                {{#each registroCita }}
 
                                 <body>
                                     <tr>
-                                        <td>{{ codigoCurso }}</td>
-                                        <td>{{ nameCurso }}</td>
-                                        <td>{{ descripcionCurso }}</td>
-                                        <td>{{ docenteCurso }}</td>
-                                        <td>{{ costoCurso }}</td>
+                                        <td>{{ codigoCita }}</td>
+                                        <td>{{ personalCita }}</td>
+                                        <td>{{ costoCita }}</td>
+                                        <td>{{ descripcionCita }}</td>
+                                        <td>{{ horaCita }}</td>
+                                        <td>{{ realizoPago }}</td>
+                                        <td>
+                                            <div class="col text-center"><button
+                                                    class="btn btn-danger btnEliminar btn-sm" type="submit">
+                                                    Pagar
+                                                </button></div>
+                                        </td>
                                     </tr>
                                 </body>
                                 {{/each}}

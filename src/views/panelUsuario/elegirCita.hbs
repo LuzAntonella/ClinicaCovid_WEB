@@ -97,63 +97,66 @@
                     {{#each Cita}}
                     <div class="col-md-4">
                         <div class="container p-3">
-                            <div class="card mx-auto" style="width: 15rem;">
-
-                                <div class="card-body">
-                                    <i class="icon ion-md-folder mr-2 lead"></i>Cita<p class="card-title">{{codigoCita}}
-                                    </p>
-                                    Descripción<p class="card-text">{{descripcionCita}}</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
+                            <div class="card" style="width: 15rem;">
+                                <form action="/addElegirCita/{{id}}" method="POST">
                                     <div class="card-body">
-                                        <i class="icon ion-md-person mr-2 lead"></i>P.Médica<p class="card-title">
-                                            {{personalCita}}
+                                        <i class="icon ion-md-folder mr-2 lead"></i>Cita<p class="card-title">
+                                            {{codigoCita}}
                                         </p>
+                                        Descripción<p class="card-text">{{descripcionCita}}</p>
                                     </div>
+                                    <ul class="list-group list-group-flush">
+                                        <div class="card-body">
+                                            <i class="icon ion-md-person mr-2 lead"></i>P.Médica<p class="card-title">
+                                                {{personalCita}}
+                                            </p>
+                                        </div>
 
-                                </ul>
-                                <ul class="list-group list-group-flush">
+                                    </ul>
+                                    <ul class="list-group list-group-flush">
+                                        <div class="card-body">
+                                            <i class="icon ion-md-cash mr-2 lead"></i>Costo $ <p class="card-text">
+                                                {{costoCita}}</p>
+                                            <i class="icon ion-md-calendar mr-2"></i>Fecha y Hora <p class="card-text">
+                                                {{fechaCita}} {{horaCita}}</p>
+                                        </div>
+
+
+                                    </ul>
+                                    <!-- Button trigger modal -->
                                     <div class="card-body">
-                                        <i class="icon ion-md-cash mr-2 lead"></i>Costo $ <p class="card-text">
-                                            {{costoCita}}</p>
-                                        <i class="icon ion-md-calendar mr-2"></i>Fecha y Hora <p class="card-text">
-                                            {{fechaCita}} {{horaCita}}</p>
+                                        <button class="btn btnEditar text-light center"
+                                            style="background-color: #81b214;" data-toggle="modal"
+                                            data-target="#staticBackdrop">Registrarse</button>
+
                                     </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static"
+                                        data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Registro</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Desea registrarse en esta cita?
+                                                </div>
+                                                <div class="modal-footer">
 
-
-                                </ul>
-                                <!-- Button trigger modal -->
-                                <div class="card-body">
-                                    <button class="btn btnEditar text-light center" style="background-color: #81b214;"
-                                        data-toggle="modal" data-toggle="modal"
-                                        data-target="#staticBackdrop">Registrarse</button>
-
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
-                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Registro</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ¿Desea registrarse en esta cita?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a class="nav-link" href="/misCitas">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Yes</button>
-                                                </a>
+                                                    <button class="btn btn-primary" type="submit">Yes</button>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
 
                         </div>

@@ -260,3 +260,85 @@
   color: #fff;
   font-size: 20px;
 }
+
+/**Testimonios(Personal)**/
+
+.testimonios {
+  width: 100%;
+  margin-top: 100px;
+}
+.testimonios .testimonios-title {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+.testimonios .testimonios-title h2 {
+  font-size: 50px;
+  color: #000000;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+.testimonios .testimonios-title hr {
+  width: 60%;
+  margin: auto;
+  height: 2px;
+  background: #000000;
+  border: none;
+}
+.testimonios .box-testimonios {
+  width: 50%;
+  margin: 30px auto;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.testimonios .box-testimonios .card-testimonio {
+  width: 25%;
+  margin: 25px;
+}
+.testimonios .box-testimonios .card-testimonio .card-img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.testimonios .box-testimonios .card-testimonio .card-img img {
+  width: 158px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #e43636;
+  object-fit: cover;
+  cursor: pointer;
+}
+.testimonios .box-testimonios .card-testimonio .testimonio-text {
+  width: 100%;
+  border: 2px solid #e43636;
+  margin-top: 30px;
+  padding: 15px;
+  border-radius: 28px;
+  cursor: pointer;
+  transition: 200ms;
+}
+.testimonios .box-testimonios .card-testimonio .testimonio-text h6 {
+  color: #e43636;
+  font-weight: normal;
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: 200ms;
+}
+.testimonios .box-testimonios .card-testimonio .testimonio-text p {
+  font-size: 15px;
+  color: #000000;
+  text-align: center;
+  line-height: 35px;
+  transition: 200ms;
+}
+.testimonios .box-testimonios .card-testimonio .testimonio-text:hover {
+  border: 2px solid #5771d7;
+}
+.testimonios .box-testimonios .card-testimonio .testimonio-text:hover h6 {
+  color: #5771d7;
+}
+/**Testimonios**/
