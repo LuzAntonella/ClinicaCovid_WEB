@@ -68,3 +68,62 @@ a:hover {
     display: none;
   }
 }
+/*MI PERFIL*/
+.miPerfil {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/*Expresiones Regulares-Validar Formulario*/
+.formulario {
+  display: grid;
+  gap: 15px;
+}
+.formulario__grupo {
+  position: relative;
+}
+
+.formulario__input-error {
+  font-size: 12px;
+  margin-bottom: 0;
+  display: none;
+}
+
+.formulario__input-error-activo {
+  display: block;
+}
+
+.formulario__validation-estado {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 100;
+  font-size: 16px;
+  opacity: 0;
+}
+/*Estilos para validacion*/
+.formulario__grupo-correcto .formulario__validation-estado {
+  color: #1ed12d;
+  opacity: 1;
+}
+
+.formulario__grupo-incorrecto .formulario__validation-estado {
+  color: #bb2929;
+  opacity: 1;
+}
+.formulario__grupo-incorrecto #name {
+  border: 1px solid #bb2929;
+}
+.formulario__grupo-incorrecto #apellido {
+  border: 1px solid #bb2929;
+}
+.formulario__grupo-incorrecto #telefono {
+  border: 1px solid #bb2929;
+}
+.formulario__grupo-incorrecto #email {
+  border: 1px solid #bb2929;
+}
+.formulario__grupo-incorrecto #password {
+  border: 1px solid #bb2929;
+}

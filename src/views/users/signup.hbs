@@ -5,16 +5,29 @@
                 Account Register
             </div>
             <div class="card-body">
-                <form action="/users/signup" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="dni" placeholder="DNI">
+                <form action="/users/signup" method="POST" enctype="multipart/form-data" id="formulario"
+                    class="formulario">
+                    <!--Grupo dni-->
+                    <div class="formulario__grupo" id="grupo__dni">
+                        <input type="text" class="form-control" name="dni" placeholder="DNI" id="dni">
+                        <i class="formulario__validation-estado far fa-times-circle"></i>
+                        <p class="formulario__input-error">El dni tiene que ser de 8 dígitos.</p>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{name}}">
+                    <!--Grupo nombre "form-group"-->
+                    <div class="formulario__grupo" id="grupo__name">
+                        <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{name}}"
+                            id="name">
+                        <i class="formulario__validation-estado far fa-times-circle"></i>
+                        <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo puede
+                            contener numeros, letras y guion bajo.</p>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="apellido" placeholder="Apellido"
+                    <!--Grupo apellido-->
+                    <div class="formulario__grupo" id="grupo__apellido">
+                        <input type="text" class="form-control" name="apellido" placeholder="Apellido" id="apellido"
                             value="{{apellido}}">
+                        <i class="formulario__validation-estado far fa-times-circle"></i>
+                        <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y solo puede
+                            contener numeros, letras y guion bajo.</p>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3"
@@ -34,12 +47,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="telefono" placeholder="Teléfono"
+                    <!--Grupo telefono-->
+                    <div class="formulario__grupo" id="grupo__telefono">
+                        <input type="text" class="form-control" name="telefono" placeholder="Teléfono" id="telefono"
                             value="{{telefono}}">
+                        <i class="formulario__validation-estado far fa-times-circle"></i>
+                        <p class="formulario__input-error">El telefono solo puede contener numeros y el maximo son 14
+                            dígitos.</p>
                     </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{email}}">
+                    <!--Grupo email-->
+                    <div class="formulario__grupo" id="grupo__email">
+                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{email}}"
+                            id="email">
+                        <i class="formulario__validation-estado far fa-times-circle"></i>
+                        <p class="formulario__input-error">El correo solo puede contener letras, numeros, puntos,
+                            guiones y guion bajo.</p>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-5 col-form-label lead text-muted font-weight-bold">Fecha
@@ -48,13 +70,17 @@
                             <input type="date" class="form-control" name="fechaNacimiento" placeholder="Email">
                         </div>
                     </div>
-                    <div class=" form-group">
+                    <div class="formulario__grupo" id="grupo__password">
                         <input type="password" class="form-control" name="password" placeholder="Password"
-                            value="{{password}}">
+                            value="{{password}}" id="password">
+                        <i class="formulario__validation-estado far fa-times-circle"></i>
+                        <p class="formulario__input-error">La contraseña debe ser mayor de 4</p>
                     </div>
-                    <div class=" form-group">
+                    <div class="formulario__grupo" id="grupo__password2">
                         <input type="password" class="form-control" name="confirm_password" placeholder="Password"
-                            value="{{confirm_password}}">
+                            value="{{confirm_password}}" id="password2">
+                        <i class="formulario__validation-estado far fa-times-circle"></i>
+                        <p class="formulario__input-error">Las contraseñas deben coincidir</p>
                     </div>
                     <div class="input-group mb-3">
                         <div class="custom-file">
