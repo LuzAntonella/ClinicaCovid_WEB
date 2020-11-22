@@ -75,7 +75,7 @@ a:hover {
   gap: 20px;
 }
 
-/*Expresiones Regulares-Validar Formulario*/
+/*------------Expresiones Regulares-Validar Formulario---------------------*/
 .formulario {
   display: grid;
   gap: 15px;
@@ -112,6 +112,9 @@ a:hover {
   color: #bb2929;
   opacity: 1;
 }
+.formulario__grupo-incorrecto #dni {
+  border: 1px solid #bb2929;
+}
 .formulario__grupo-incorrecto #name {
   border: 1px solid #bb2929;
 }
@@ -125,5 +128,8 @@ a:hover {
   border: 1px solid #bb2929;
 }
 .formulario__grupo-incorrecto #password {
+  border: 1px solid #bb2929;
+}
+.formulario__grupo-incorrecto #password2 {
   border: 1px solid #bb2929;
 }
