@@ -14,6 +14,9 @@ cloudinary.config({
 const fs = require('fs-extra');
 
 router.get('/moduloU', isAuthenticated, async (req, res) => {
+    User.count({}, function(err, count) {
+    console.log( "Total: ", count);
+    });
     await User.find({user: req.body._id})
     
       .then(documentos => {
