@@ -67,28 +67,23 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Calendario -->
-                                <form>
-                                    <section class="col-sm-6">
-                                        <div class="form-group">
-                                            <div class="input-group" id="datetimepicker">
-                                                <input type="text" class="form-control">
-                                                <span class="input-group-addon">
-                                                    <span class="icon ion-md-apps"></span>
-                                                </span>
-                                            </div>
+                                <form action="/buscarFecha" method="POST">
+                                    <div class="form-group row">
+                                        <label for="inputEmail3"
+                                            class="col-sm-5 col-form-label lead text-muted font-weight-bold">Fecha
+                                            a Buscar</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" id="fechaBuscar" name="fechaBuscar" class="form-control">
                                         </div>
-                                    </section>
-                                    <script type="text/javascript">
-                                        $(function () {
-                                            $('#datetimepicker').datetimepicker();
-                                        });
-                                    </script>
-                                </form>
+                                    </div>
+
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Go</button>
+                                <button type="submit" class="btn btn-primary">Go</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -160,6 +155,15 @@
                                     </div>
                                 </form>
                             </div>
+
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="card mx-auto">
+                        <div class="card-body">
+                            <h1>Hello</h1>
+                            <p class="lead">No hay citas programadas</p>
+                            <a href="/panelUsu" class="btn btn-info btn-lg btn-block">Citas Disponibles!</a>
 
                         </div>
                     </div>

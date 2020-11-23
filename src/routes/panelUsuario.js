@@ -32,6 +32,27 @@ router.get('/panelUsu', isAuthenticated,async (req, res) => {
 });
 
 
+router.post('/buscarFecha', async (req, res) =>{
+  console.log(req.body.fechaBuscar);
+  await Cita.find({fechaCita:req.body.fechaBuscar})
+  .then(documentos => {
+    const contexto = {
+      Cita: documentos.map(documento => {
+      return {
+          codigoCita: documento.codigoCita,
+          personalCita: documento.personalCita,
+          costoCita: documento.costoCita,
+          horaCita: documento.horaCita,
+          fechaCita: documento.fechaCita,
+          descripcionCita: documento.descripcionCita,
+          id: documento._id,
+      }
+      })
+  }
+  res.render('panelUsuario/elegirCita', {Cita: contexto.Cita}); 
+  });
+});
+
 router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
   await FormMedico.find({user: req.user.id})
       .then(documentos => {
