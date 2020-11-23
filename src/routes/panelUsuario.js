@@ -7,7 +7,9 @@ const Cita = require('../models/Cita');
 const RegistroCita = require('../models/RegistroCita');
 const passport = require('passport');
 const cloudinary = require('cloudinary');
+const CitaPagada = require('../models/CitaPagada');
 const { isAuthenticated } = require('../helpers/auth');
+const stripe = require('stripe')('sk_test_51HqNgOCjkOObvbRNDujANQ4wxThStdTye9zCZGYRwzqn1lOfCybR2IoVQaArALPHcIb28CAGJBiAHboiXYl6b4Pp00mIO4UduN');
 
 router.get('/panelUsu', isAuthenticated,async (req, res) => {
   await Cita.find({cita: req.body.codigoCita})
@@ -162,10 +164,10 @@ router.post('/addElegirCita/:id', isAuthenticated,async (req,res) => {
   newRegistroCita.user = req.user.id;
   await newRegistroCita.save();
   req.flash('success_msg','Se ha registrado en la cita', datosF.codigoCita);
-  res.redirect(('/misCitas'));
+  res.redirect(('/misPagos'));
 });
 
-router.get('/misCitas', isAuthenticated,async (req, res) => {
+router.get('/misPagos', isAuthenticated,async (req, res) => {
   await RegistroCita.find({user: req.user.id})
       .then(documentos => {
         const contexto = {
@@ -182,8 +184,114 @@ router.get('/misCitas', isAuthenticated,async (req, res) => {
             }
           })
         }
-        res.render('panelUsuario/misCitas', {
+        res.render('panelUsuario/misPagos', {
         registroCita: contexto.formM }) 
       })
 });
+//-------------------------------------------------------------------------------
+//ELIMINAR CURSO ANTES DE PAGAR-ARREPENTIDO
+router.delete('/pago/delete/:id',isAuthenticated, async (req,res) => {
+  await RegistroCita.findByIdAndDelete(req.params.id);
+  req.flash('success_msg','Cita Deleted Successfully');
+  res.redirect('/misPagos');
+});
+
+//Mis citas ya registradas
+router.get('/checkout',isAuthenticated,async(req, res) => {
+  await CitaPagada.find({user: req.user.id})
+      .then(documentos => {
+        const contexto = {
+            formM: documentos.map(documento => {
+            return {
+              codigoCita: documento.codigoCita,
+              personalCita: documento.personalCita,
+              docenteCurso: documento.docenteCurso,
+              costoCita: documento.costoCita,
+              descripcionCita: documento.descripcionCita,
+              horaCita: documento.horaCita,
+              fechaCita: documento.fechaCita,
+              estado: documento.estado,
+              fechaPagado: documento.date,
+              id: documento._id
+            }
+          })
+        }
+        res.render('panelUsuario/citasRegistradas', {
+        misCitas: contexto.formM }) 
+      })
+        
+});
+
+//----------------Stripe-----------------
+router.post('/checkout/:id', async (req,res) => {
+  console.log(req.body);
+  //Buscar en base de datos
+  const datosF = await RegistroCita.findById(req.params.id);
+  const cancelado= "cancelado";
+  //Actualizar
+  await RegistroCita.findByIdAndUpdate(req.params.id,{
+      codigoCita: datosF.codigoCita,
+      personalCita: datosF.personalCita,
+      costoCita: datosF.costoCita,
+      descripcionCita: datosF.descripcionCita,
+      horaCita: datosF.horaCita,
+      fechaCita: datosF.fechaCita,
+      realizoPago: cancelado,
+      date: datosF.date,
+      user: datosF.user
+    });
+  //Pagado Curso
+  const newCitaPagada = new CitaPagada({
+    codigoCita:datosF.codigoCita,
+    personalCita:datosF.personalCita,
+    costoCita: datosF.costoCita,
+    descripcionCita: datosF.descripcionCita,
+    horaCita: datosF.horaCita,
+    fechaCita: datosF.fechaCita});
+    newCitaPagada.user = req.user.id;
+    await newCitaPagada.save();
+    req.flash('success_msg','Ha pagado ',datosF.codigoCita);
+
+  
+  //Stripe - Pagos
+  const customer = await stripe.customers.create({
+    email: req.body.stripeEmail,
+    source: req.body.stripeToken
+  });
+  const charge = await stripe.charges.create({
+    amount: datosF.costoCita,
+    currency: 'usd',
+    customer: customer.id,
+    description: datosF.descripcionCita
+  });
+  console.log(charge.id);
+
+  //Respuesta Final
+  res.redirect('/citasPagadas');
+});
+
+router.get('/citasPagadas', isAuthenticated,async (req, res) => {
+  await CitaPagada.find({user: req.user.id})
+      .then(documentos => {
+        const contexto = {
+            formM: documentos.map(documento => {
+            return {
+              codigoCita: documento.codigoCita,
+              personalCita: documento.personalCita,
+              docenteCurso: documento.docenteCurso,
+              costoCita: documento.costoCita,
+              descripcionCita: documento.descripcionCita,
+              horaCita: documento.horaCita,
+              fechaCita: documento.fechaCita,
+              estado: documento.estado,
+              fechaPagado: documento.date,
+              id: documento._id
+            }
+          })
+        }
+        res.render('panelUsuario/citasPagadas', {
+        citaPagada: contexto.formM }) 
+      })
+});
+
 module.exports = router;
